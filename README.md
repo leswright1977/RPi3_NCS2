@@ -48,7 +48,7 @@ Pinto has been playing with NCS and OpenVINO for some time, you should definitel
 ***yolo_images_test.py***
 This script reads an image called in.jpg and shows and writes an image called out.png with bounding boxes and labels:
 
-![Screenshot](media/out.png)
+![Screenshot](media/cars.png)
 
 ***yolo_test_threaded***
 This script is heavily based on that by Pinto, however I have threaded a couple or parts to allow it to run reasonably on the RPi3B+ and NCS2
