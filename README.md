@@ -41,5 +41,13 @@ Setting a camera to say 25 fps when it expects either 20 or 30 will cause the sc
 If you suddenly get a terrible framerate, try turning the lights up! My USB cam at least, throttles its own framerate if lighting is poor, presumably it perfroms frame integration in low light(cv2.CAP_PROP_FPS does not seem to report this!).
 
 
+***UPDATE YOLOv3***
+2 scripts have been added with kind permission based on the awesome work of Pinto: https://github.com/PINTO0309/OpenVINO-YoloV3/
+Pinto has been playing with NCS and OpenVINO for some time, you should definitelty head on over there!
 
+***yolo_images_test.py***
+This script reads an image called in.jpg and shows and writes an image called out.png with bounding boxes and labels. 
+
+***yolo_test_threaded***
+This script is heavily based on that by Pinto, however I have threaded a couple or parts to allow it to run reasonably on the RPi3B+ and NCS2
 
