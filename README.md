@@ -51,3 +51,6 @@ This script reads an image called in.jpg and shows and writes an image called ou
 ***yolo_test_threaded***
 This script is heavily based on that by Pinto, however I have threaded a couple or parts to allow it to run reasonably on the RPi3B+ and NCS2
 
+Both scripts require the YOLOV3 model, which is available here:
+https://drive.google.com/open?id=1fw3O5_13PkjQj2xM2lt8vRzP2VQ_z1a7
+
