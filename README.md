@@ -22,7 +22,9 @@ Naive initial scripts (experiments), all the work prepping and forwarding is don
 
 **pi_NCS2_USB_cam_threaded_mobilenet.py**
 Threaded example using the mobilenet-ssd model, converted from the caffe model using the OpenVino toolkit
-The models are present in src/models to save you a job.
+The models are present in src/models to save you a job:
+
+![Screenshot](media/mobilenetSSD.gif)
 
 **pi_NCS2_USB_cam_threaded_faces.py**
 Threaded example using the models from: https://download.01.org/openvinotoolkit/2018_R4/open_model_zoo/
