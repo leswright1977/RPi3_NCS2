@@ -124,7 +124,7 @@ def ParseYOLOV3Output(blob, resized_im_h, resized_im_w, original_im_h, original_
 def main_IE_infer():
 
 
-    image = cv2.imread('cars.jpg')
+    image = cv2.imread('in.jpg')
     image_width = np.size(image,1)
     image_height = np.size(image,0)
 
