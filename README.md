@@ -11,8 +11,10 @@ Follow the instructions here to set up and configure your Pi:
 https://software.intel.com/en-us/articles/OpenVINO-Install-RaspberryPI
 
 The following scripts are provided in src/:
-**UPDATE! Robot Code added!**
+
+**UPDATE! Robot Code added 18/01/2019!**
 ![Screenshot](media/robot.jpg)
+
 2_robot_picam_test_NCS2_mobilenet.py
 This script allows you to control a robot platform to track and chase any object in the MobileNet-SSD model!
 See: https://www.youtube.com/watch?v=Y5V331kbSvY&list=PLB2Z43zIP_3a8-eNjE5i-EajiCa-bXxgM for a demo!
