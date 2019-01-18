@@ -18,6 +18,7 @@ The following scripts are provided in src/:
 **2_robot_picam_test_NCS2_mobilenet.py**
 This script allows you to control a robot platform to track and chase any object in the MobileNet-SSD model!
 See: https://www.youtube.com/watch?v=Y5V331kbSvY&list=PLB2Z43zIP_3a8-eNjE5i-EajiCa-bXxgM for a demo!
+Currently it follows beer bottles, but alter one int in the code (object id) and the expected width of your object, and with a little tweaking you can have it follow a person, the cat, the dog, or whatvever else you like...
 
 
 **openvino_fd_myriad.py**
