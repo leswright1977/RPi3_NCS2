@@ -46,7 +46,7 @@ cap.set(cv2.CAP_PROP_FRAME_HEIGHT, frameHeight)
 cap.set(cv2.CAP_PROP_FPS, framesPerSec)
 
 Check what your camera is capable of if you get errors, some cameras do FPS in mutiples of 10, some use multiples of 6!
-Setting a camera to say 25 fps when it expects either 20 or 30 will cause the script to bomb out.
+Setting a camera to say 24 fps when it expects either 20 or 30 will cause the script to bomb out.
 
 ***ALSO:***
 If you suddenly get a terrible framerate, try turning the lights up! My USB cam at least, throttles its own framerate if lighting is poor, presumably it perfroms frame integration in low light(cv2.CAP_PROP_FPS does not seem to report this!).
