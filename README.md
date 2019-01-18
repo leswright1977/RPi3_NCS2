@@ -54,7 +54,7 @@ If you suddenly get a terrible framerate, try turning the lights up! My USB cam 
 
 ***UPDATE YOLOv3***
 2 scripts have been added with kind permission based on the awesome work of Pinto: https://github.com/PINTO0309/OpenVINO-YoloV3/
-Pinto has been playing with NCS and OpenVINO for some time, you should definitelty head on over there!
+Pinto has been playing with NCS and OpenVINO for some time, you should definitely head on over there!
 
 ***yolo_images_test.py***
 This script reads an image called in.jpg and shows and writes an image called out.png with bounding boxes and labels:
