@@ -27,7 +27,7 @@ GPIO.setup(24,GPIO.OUT) #right track backwards
 GPIO.setup(25,GPIO.OUT) #right track fwd
 
 
-def test(xminQueue,xmaxQueue):
+def motion(xminQueue,xmaxQueue):
 	def left(stime):
 		GPIO.output(18,False)
 		GPIO.output(25,True)
@@ -122,7 +122,7 @@ xmaxQueue = Queue(maxsize=1)
 # construct a child process indepedent from our main process
 
 print("[INFO] starting motion handling process...")
-p2 = Process(target=test, args=(xminQueue,xmaxQueue))
+p2 = Process(target=motion, args=(xminQueue,xmaxQueue))
 p2.daemon = True
 p2.start()
 
