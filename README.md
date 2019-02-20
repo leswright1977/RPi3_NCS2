@@ -13,7 +13,7 @@ https://software.intel.com/en-us/articles/OpenVINO-Install-RaspberryPI
 The following scripts are provided in src/:
 
 **UPDATE 20 Feb 2019** 
-A new script is available! up to 30FPS vide, up to 28FPS detection speed using MobileNet SSD, on a single NCS2! This is more like it!
+A new script is available! up to 30FPS video, up to 28FPS detection speed using MobileNet SSD, on a single NCS2! This is more like it!
 **refined_picam_test_NCS2_mobilenet.py**
 
 A number of changes have been made to the original script.
