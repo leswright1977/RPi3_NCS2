@@ -1,16 +1,33 @@
 # RPi3_NCS2
-Intel Neural Compute Stick 2 Running on RPI 3 with Threading
+Intel Neural Compute Stick 2 Running on RPI 3 with ~~Threading~~ Multiprocessing
 
 These Scripts allow you to do Object detection on the Raspberry Pi 3B+ using the Intel Neural Compute stick.
 Frame rate for pi_NCS2_USB_cam_threaded_mobilenet.py is around 20 FPS at 320x240. Detection is a little lower than the framerate, but not by much!
 Scaling video down to 320x240 seems small, but it is quite viewable and the network input layer is only 300x300 in any case, so bigger is just wasteful.
 
-This pretty decent framerate was achived by moving the blocking operation (net.forward()) is removed to a thread, along with a bunch of related stuff(pre-processing the frame etc).
+This pretty decent framerate was achived by moving the blocking operation (net.forward()) is removed to a ~~thread~~ process, along with a bunch of related stuff(pre-processing the frame etc).
 
 Follow the instructions here to set up and configure your Pi:
 https://software.intel.com/en-us/articles/OpenVINO-Install-RaspberryPI
 
 The following scripts are provided in src/:
+
+**UPDATE 20 Feb 2019** 
+A new script is available! up to 30FPS vide, up to 28FPS detection speed using MobileNet SSD, on a single NCS2! This is more like it!
+**refined_picam_test_NCS2_mobilenet.py**
+
+A number of changes have been made to the original script.
+First and foremost I must mention threading. This was actually ditched early on in favour of processes in all my scripts.
+
+Video grabbed from the picam is initially 304x304, this reduces overhead, and anything bigger is wasteful, since our network input layer is ony 300x300 in any case.
+
+Almost all processing that formerly took place in the main video thread has now been moved out to subprocesses. The only thing that happens (and should happen) in the main loop, is read a frame from the camera, push and pull data, display bounding boxes and display frames.
+
+There are probably a few more things to tweak here (get rid of some more math out of the loop, etc) to milk every last cycle out of the CPU and NCS2 and tidy things up a bit, but I would say this is about done, and is certainly very usable in its current form!
+
+Enjoy!
+
+
 
 **UPDATE! Robot Code added 18/01/2019!**
 ![Screenshot](media/robot.jpg)
@@ -36,7 +53,7 @@ The models are present in src/models to save you a job:
 ![Screenshot](media/mobilenetSSD.gif)
 
 **pi_NCS2_USB_cam_threaded_faces.py**
-Threaded example using the models from: https://download.01.org/openvinotoolkit/2018_R4/open_model_zoo/
+~~Threaded~~ Multi Processing example using the models from: https://download.01.org/openvinotoolkit/2018_R4/open_model_zoo/
 Specifically face-detection-retail-0004
 
 **Note:**
