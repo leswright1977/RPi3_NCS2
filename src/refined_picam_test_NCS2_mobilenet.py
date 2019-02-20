@@ -30,8 +30,10 @@ net.setPreferableTarget(cv2.dnn.DNN_TARGET_MYRIAD)
 font = cv2.FONT_HERSHEY_SIMPLEX
 frameWidth = 304
 frameHeight = 304
-secPerFrame = 0.0
-detections = 0.0
+queuepulls = 0.0
+detections = 0
+fps = 0.0
+qfps = 0.0
 
 confThreshold = 0.6
 
@@ -146,18 +148,32 @@ for frame in camera.capture_continuous(rawCapture, format="rgb", use_video_port=
 				#labeltext
 				cv2.putText(frame,' '+labels[objID]+' '+str(round(confidence,2)),\
 				(xmin,ymin-2), font, 0.3,(0,0,0),1,cv2.LINE_AA)
+				detections +=1 #positive detections
 	
-		detections += 1
+		queuepulls += 1
 
 	# Display the resulting frame
-	cv2.putText(frame,'Threshold: '+str(round(confThreshold,1)), (10, 10), cv2.FONT_HERSHEY_SIMPLEX, 0.3,(0, 0, 0), 1, cv2.LINE_AA)
+	cv2.putText(frame,'Threshold: '+str(round(confThreshold,1)), (10, 10), cv2.FONT_HERSHEY_SIMPLEX, 0.3,(0, 255, 255), 1, cv2.LINE_AA)
+
+	cv2.putText(frame,'VID FPS: '+str(fps), (230, 10), cv2.FONT_HERSHEY_SIMPLEX, 0.3,(0, 255, 255), 1, cv2.LINE_AA)
+
+	cv2.putText(frame,'NCS FPS: '+str(qfps), (230, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.3,(0, 255, 255), 1, cv2.LINE_AA)
+
+	cv2.putText(frame,'Positive detections: '+str(detections), (10, 290), cv2.FONT_HERSHEY_SIMPLEX, 0.3,(0, 255, 255), 1, cv2.LINE_AA)
+
 	cv2.namedWindow('frame',cv2.WINDOW_NORMAL)
 	cv2.resizeWindow('frame',frameWidth,frameHeight)
 	cv2.imshow('frame',frame)
 	
-	
+	# FPS calculation
+	frames += 1
+	if frames >= 10:
+		end = time.time()
+		seconds = end-start
+		fps = round(frames/seconds,2)
+		qfps = round(queuepulls/seconds,2)
 
-	frames+=1
+
 
 	# clear the stream in preparation for the next frame
 	rawCapture.truncate(0)
@@ -179,12 +195,7 @@ for frame in camera.capture_continuous(rawCapture, format="rgb", use_video_port=
 		confThreshold = 0
 
 
-end = time.time()
-seconds = end-start
-fps = frames/seconds
-print("Avg Frames Per Sec: "+str(fps))
-dts = detections/seconds
-print("Avg detections Per Sec: "+str(dts))
+
 
 
 cv2.destroyAllWindows()
