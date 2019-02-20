@@ -2,8 +2,7 @@
 Intel Neural Compute Stick 2 Running on RPI 3 with ~~Threading~~ Multiprocessing
 
 These Scripts allow you to do Object detection on the Raspberry Pi 3B+ using the Intel Neural Compute stick.
-Frame rate for pi_NCS2_USB_cam_threaded_mobilenet.py is around 20 FPS at 320x240. Detection is a little lower than the framerate, but not by much!
-Scaling video down to 320x240 seems small, but it is quite viewable and the network input layer is only 300x300 in any case, so bigger is just wasteful.
+Examples are provided that make use of USB cameras or the PiCam.
 
 This pretty decent framerate was achived by moving the blocking operation (net.forward()) is removed to a ~~thread~~ process, along with a bunch of related stuff(pre-processing the frame etc).
 
@@ -13,7 +12,7 @@ https://software.intel.com/en-us/articles/OpenVINO-Install-RaspberryPI
 The following scripts are provided in src/:
 
 **UPDATE 20 Feb 2019** 
-A new script is available! up to 30FPS video, up to 28FPS detection speed using MobileNet SSD, on a single NCS2! This is more like it!
+A new script is available! up to **30FPS** video, up to **28FPS** detection speed using MobileNet SSD, on a single NCS2! This is more like it!
 
 
 ![Screenshot](media/warp-speed.png)
