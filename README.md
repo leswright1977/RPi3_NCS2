@@ -15,7 +15,7 @@ The following scripts are provided in src/:
 A new script is available! up to **30FPS** video, up to **10FPS** detection speed using MobileNet SSD, on a single NCS2.
 
 
-![Screenshot](media/warp.png)
+![Screenshot](media/refined.png)
 
 
 **refined_picam_test_NCS2_mobilenet.py**
