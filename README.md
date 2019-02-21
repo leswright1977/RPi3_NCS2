@@ -12,10 +12,10 @@ https://software.intel.com/en-us/articles/OpenVINO-Install-RaspberryPI
 The following scripts are provided in src/:
 
 **UPDATE 20 Feb 2019** 
-A new script is available! up to **30FPS** video, up to **28FPS** detection speed using MobileNet SSD, on a single NCS2! This is more like it!
+A new script is available! up to **30FPS** video, up to **30FPS** detection speed using MobileNet SSD, on a single NCS2! This is more like it!
 
 
-![Screenshot](media/warp-speed.png)
+![Screenshot](media/warp.png)
 
 
 **refined_picam_test_NCS2_mobilenet.py**
@@ -27,7 +27,7 @@ Video grabbed from the picam is initially 304x304, this reduces overhead, and an
 
 Almost all processing that formerly took place in the main video thread has now been moved out to subprocesses. The only thing that happens (and should happen) in the main loop, is read a frame from the camera, push and pull data, display bounding boxes and display frames.
 
-There are probably a few more things to tweak here (get rid of some more math out of the loop, etc) to milk every last cycle out of the CPU and NCS2 and tidy things up a bit, but I would say this is about done, and is certainly very usable in its current form!
+I would say this is about done, and is certainly very usable in its current form!
 
 Enjoy!
 
