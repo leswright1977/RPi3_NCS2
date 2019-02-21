@@ -35,7 +35,7 @@ detections = 0
 fps = 0.0
 qfps = 0.0
 
-confThreshold = 0.6
+confThreshold = 0.4
 
 
 
@@ -66,8 +66,8 @@ def classify_frame(net, inputQueue, outputQueue):
 			# grab the frame from the input queue, resize it, and
 			# construct a blob from it
 			frame = inputQueue.get()
-			frame = cv2.resize(frame, (300, 300))
-			blob = cv2.dnn.blobFromImage(frame, 0.007843, size=(300, 300),\
+			resframe = cv2.resize(frame, (300, 300))
+			blob = cv2.dnn.blobFromImage(resframe, 0.007843, size=(300, 300),\
 			mean=(127.5,127.5,127.5), swapRB=False, crop=False)
 			net.setInput(blob)
 			out = net.forward()
@@ -78,10 +78,10 @@ def classify_frame(net, inputQueue, outputQueue):
 				inference = []
 				obj_type = int(detection[1]-1)
 				confidence = float(detection[2])
-				xmin = detection[3]
-				ymin = detection[4]
-				xmax = detection[5]
-				ymax = detection[6]
+				xmin = int(detection[3] * frame.shape[1])
+				ymin = int(detection[4] * frame.shape[0])
+				xmax = int(detection[5] * frame.shape[1])
+				ymax = int(detection[6] * frame.shape[0])
 
 				if confidence > 0: #ignore garbage
 					inference.extend((obj_type,confidence,xmin,ymin,xmax,ymax))
@@ -106,10 +106,15 @@ p.start()
 print("[INFO] starting capture...")
 
 #time the frame rate....
-start = time.time()
+timer1 = time.time()
 frames = 0
+queuepulls = 0
+timer2 = 0
+t2secs = 0
 
 for frame in camera.capture_continuous(rawCapture, format="rgb", use_video_port=True):
+	if queuepulls ==1:
+		timer2 = time.time()
 	# Capture frame-by-frame
 	frame = frame.array
 
@@ -133,10 +138,10 @@ for frame in camera.capture_continuous(rawCapture, format="rgb", use_video_port=
 			objID = detection[0]
 			confidence = detection[1]
 
-			xmin = int(detection[2] * frame.shape[1])
-			ymin = int(detection[3] * frame.shape[0])
-			xmax = int(detection[4] * frame.shape[1])
-			ymax = int(detection[5] * frame.shape[0])
+			xmin = detection[2]
+			ymin = detection[3]
+			xmax = detection[4]
+			ymax = detection[5]
 
 			if confidence > confThreshold:
 				#bounding box
@@ -159,7 +164,9 @@ for frame in camera.capture_continuous(rawCapture, format="rgb", use_video_port=
 
 	cv2.putText(frame,'NCS FPS: '+str(qfps), (230, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.3,(0, 255, 255), 1, cv2.LINE_AA)
 
-	cv2.putText(frame,'Positive detections: '+str(detections), (10, 290), cv2.FONT_HERSHEY_SIMPLEX, 0.3,(0, 255, 255), 1, cv2.LINE_AA)
+	cv2.putText(frame,'Positive detections: '+str(detections), (10, 290), cv2.FONT_HERSHEY_SIMPLEX, 0.3,(0, 55, 55), 1, cv2.LINE_AA)
+
+	cv2.putText(frame,'Elapsed time: '+str(round(t2secs,2)), (150, 290), cv2.FONT_HERSHEY_SIMPLEX, 0.3,(0, 55, 55), 1, cv2.LINE_AA)
 
 	cv2.namedWindow('frame',cv2.WINDOW_NORMAL)
 	cv2.resizeWindow('frame',frameWidth,frameHeight)
@@ -167,11 +174,14 @@ for frame in camera.capture_continuous(rawCapture, format="rgb", use_video_port=
 	
 	# FPS calculation
 	frames += 1
-	if frames >= 10:
-		end = time.time()
-		seconds = end-start
-		fps = round(frames/seconds,2)
-		qfps = round(queuepulls/seconds,2)
+	if frames >= 1:
+		end1 = time.time()
+		t1secs = end1-timer1
+		fps = round(frames/t1secs,2)
+	if queuepulls > 1:
+		end2 = time.time()
+		t2secs = end2-timer2
+		qfps = round(queuepulls/t2secs,2)
 
 
 
