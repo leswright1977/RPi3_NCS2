@@ -14,6 +14,13 @@ The following scripts are provided in src/:
 **UPDATE 20 Feb 2019** 
 A new script is available! up to **30FPS** video, up to **10FPS** detection speed using MobileNet SSD, on a single NCS2.
 
+A note on Frame rates of NCS2:
+
+There seems to be some confusion about this! The framerate shown (~10FPS) is the number of returned packets of data from the NCS2, i/e 10 video frames are processed by the NCS2 every second.
+
+This is very different from the number of acual inferences! From the image below we can see that 1683 positive inferences have been performed in the last 24.19 seconds, this equates to ~70 inferences per second, or 7 inferences per frame. This is actually pretty darn good!
+
+Of course the next step here is to move away from canned models, and start building my own...
 
 ![Screenshot](media/refined.png)
 
