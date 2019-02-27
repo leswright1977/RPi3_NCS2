@@ -4,7 +4,7 @@ Intel Neural Compute Stick 2 Running on RPI 3 with ~~Threading~~ Multiprocessing
 These Scripts allow you to do Object detection on the Raspberry Pi 3B+ using the Intel Neural Compute stick.
 Examples are provided that make use of USB cameras or the PiCam.
 
-This pretty decent framerate was achived by moving the blocking operation (net.forward()) is removed to a ~~thread~~ process, along with a bunch of related stuff(pre-processing the frame etc).
+This pretty decent framerate was acheived by moving the blocking operation (net.forward()) is removed to a ~~thread~~ process, along with a bunch of related stuff(pre-processing the frame etc).
 
 Follow the instructions here to set up and configure your Pi:
 https://software.intel.com/en-us/articles/OpenVINO-Install-RaspberryPI
